@@ -23,6 +23,17 @@ jobs:
 
       - name: Checkout local
         uses: actions/checkout@v3
+        
+      - name: Validate Synapse workspace
+        uses: Azure/synapse-workspace-deployment@V1.8.0
+        with:
+          TargetWorkspaceName: 'synapse-uat-tm'
+          ArtifactsFolder: './'
+          operation: 'validate'
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ExportedArmTemplate
+          path: ./ExportedArmTemplate
       
       - name: Synapse workspace deployment
         uses: Azure/Synapse-workspace-deployment@V1.8.0
