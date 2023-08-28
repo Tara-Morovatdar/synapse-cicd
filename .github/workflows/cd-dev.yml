@@ -47,9 +47,9 @@ jobs:
         uses: Azure/Synapse-workspace-deployment@V1.8.0
         with:
           TargetWorkspaceName: 'synapse-uat-tm'
-          #ArtifactsFolder: './build'
-          TemplateFile: '${{ github.workspace }}/synapse-dev-tm/TemplateForWorkspace.json'
-          ParametersFile: '${{ github.workspace }}/synapse-dev-tm/TemplateParametersForWorkspace.json'
+          #ArtifactsFolder: './'
+          TemplateFile: './synapse-dev-tm/TemplateForWorkspace.json'
+          ParametersFile: './synapse-dev-tm/TemplateParametersForWorkspace.json'
           environment: 'Azure Public'
           resourceGroup: 'Knauf-test'
           clientId: ${{ secrets.CLIENTID }}
