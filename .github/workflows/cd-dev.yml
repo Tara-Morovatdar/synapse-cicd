@@ -8,11 +8,11 @@ on:
   push:
     
     branches: [workspace_publish]
-    paths-ignore:
-      - '.github/**'
-      - 'build/**'
-      - 'README.md'
-      - 'CODEOWNERS'
+    # paths-ignore:
+    #   - '.github/**'
+    #   - 'build/**'
+    #   - 'README.md'
+    #   - 'CODEOWNERS'
 
 # Modify the default permissions granted to GITHUB_TOKEN.
 permissions:
