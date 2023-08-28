@@ -5,15 +5,14 @@ name: cd-synapse
 on:
   workflow_dispatch:
 #Run only when the pull request is closed and it targets main branch
-  # push:
+  push:
     
-  #   branches:
-  #   - main
-  #   paths-ignore:
-  #     - '.github/**'
-  #     - 'build/**'
-  #     - 'README.md'
-  #     - 'CODEOWNERS'
+    branches: [workspace_publish]
+    paths-ignore:
+      - '.github/**'
+      - 'build/**'
+      - 'README.md'
+      - 'CODEOWNERS'
 
 # Modify the default permissions granted to GITHUB_TOKEN.
 permissions:
