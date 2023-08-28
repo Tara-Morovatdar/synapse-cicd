@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"workspaceName": {
+			"value": "synapse-dev-tm"
+		},
+		"synapse-dev-tm-WorkspaceDefaultSqlServer_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:synapse-dev-tm.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
+		"synapse-uat-tm-WorkspaceDefaultSqlServer_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:synapse-uat-tm.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
+		"synapse-dev-tm-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://storagedevtm.dfs.core.windows.net"
+		},
+		"synapse-uat-tm-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://storageuattm.dfs.core.windows.net"
+		}
+	}
+}
