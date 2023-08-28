@@ -1,11 +1,9 @@
-# This is a basic workflow to help you get started with Actions
-
 name: cd-synapse
 # Controls when the workflow will run
 on:
   workflow_dispatch:
-  push:
-    branches: [ workspace_publish ]
+  # push:
+  #   branches: [ workspace_publish ]
     # paths-ignore:
     #   - '.github/**'
     #   - 'build/**'
@@ -25,11 +23,31 @@ jobs:
 
       - name: Checkout local
         uses: actions/checkout@v3
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3.4.1
+        with:
+          node-version: 14.x
+        
+      - name: install npm Utilities package
+        run: npm install
+        working-directory: ${{github.workspace}}/build  # (1) provide the folder location of the package.json file
+
+      - name: Validate Synapse workspace
+        uses: Azure/synapse-workspace-deployment@V1.8.0
+        with:
+          TargetWorkspaceName: 'synapse-uat-tm'
+          ArtifactsFolder: './build'
+          operation: 'validate'
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ExportedArmTemplate
+          path: ${{github.workspace}}/build/ExportedArmTemplate
       
       - name: Synapse workspace deployment
         uses: Azure/Synapse-workspace-deployment@V1.8.0
         with:
           TargetWorkspaceName: 'synapse-uat-tm'
+          ArtifactsFolder: './build'
           TemplateFile: './synapse-dev-tm/TemplateForWorkspace.json'
           ParametersFile: './synapse-dev-tm/TemplateParametersForWorkspace.json'
           environment: 'Azure Public'
@@ -40,4 +58,4 @@ jobs:
           tenantId: ${{ secrets.AZURE_TENANT_ID }}
           DeleteArtifactsNotInTemplate: 'true'
           managedIdentity: 'False'
-          #operation: 'deploy'
+          operation: 'deploy'
