@@ -48,8 +48,8 @@ jobs:
         with:
           TargetWorkspaceName: 'synapse-uat-tm'
           #ArtifactsFolder: './build'
-          TemplateFile: './synapse-dev-tm/TemplateForWorkspace.json'
-          ParametersFile: './synapse-dev-tm/TemplateParametersForWorkspace.json'
+          TemplateFile: './TemplateForWorkspace.json'
+          ParametersFile: './TemplateParametersForWorkspace.json'
           environment: 'Azure Public'
           resourceGroup: 'Knauf-test'
           clientId: ${{ secrets.CLIENTID }}
