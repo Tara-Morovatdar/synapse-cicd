@@ -3,11 +3,8 @@
 name: cd-synapse
 # Controls when the workflow will run
 on:
-  #workflow_dispatch:
-#Run only when the pull request is closed and it targets main branch
   push:
-    
-    branches: [workspace_publish]
+    branches: [ workspace_publish ]
     # paths-ignore:
     #   - '.github/**'
     #   - 'build/**'
