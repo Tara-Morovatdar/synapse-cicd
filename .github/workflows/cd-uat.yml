@@ -28,7 +28,7 @@ jobs:
         uses: Azure/Synapse-workspace-deployment@V1.8.0
         with:
           TargetWorkspaceName: 'synapse-uat-tm'
-          ArtifactsFolder: './'
+          #ArtifactsFolder: './'
           TemplateFile: './synapse-dev-tm/TemplateForWorkspace.json'
           ParametersFile: './synapse-dev-tm/TemplateParametersForWorkspace.json'
           environment: 'Azure Public'
@@ -39,4 +39,4 @@ jobs:
           tenantId: ${{ secrets.AZURE_TENANT_ID }}
           DeleteArtifactsNotInTemplate: 'true'
           managedIdentity: 'False'
-          operation: 'validateDeploy'
+          operation: 'deploy'
