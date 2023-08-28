@@ -9,11 +9,7 @@ on:
     
   #   branches:
   #   - main
-  #   paths-ignore:
-  #     - '.github/**'
-  #     - 'build/**'
-  #     - 'README.md'
-  #     - 'CODEOWNERS'
+
 
 # Modify the default permissions granted to GITHUB_TOKEN.
 permissions:
