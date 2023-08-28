@@ -1,0 +1,42 @@
+name: cd-synapse
+# Controls when the workflow will run
+on:
+  workflow_dispatch:
+  push:
+    branches: [ workspace_publish ]
+    # paths-ignore:
+    #   - '.github/**'
+    #   - 'build/**'
+    #   - 'README.md'
+    #   - 'CODEOWNERS'
+
+# Modify the default permissions granted to GITHUB_TOKEN.
+permissions:
+      id-token: write
+      contents: write
+      packages: write
+
+jobs: 
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout local
+        uses: actions/checkout@v3
+      
+      - name: Synapse workspace deployment
+        uses: Azure/Synapse-workspace-deployment@V1.8.0
+        with:
+          TargetWorkspaceName: 'synapse-uat-tm'
+          #ArtifactsFolder: './'
+          TemplateFile: './synapse-dev-tm/TemplateForWorkspace.json'
+          ParametersFile: './synapse-dev-tm/TemplateParametersForWorkspace.json'
+          environment: 'Azure Public'
+          resourceGroup: 'Knauf-test'
+          clientId: ${{ secrets.CLIENTID }}
+          clientSecret: ${{ secrets.CLIENTSECRET }}
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          tenantId: ${{ secrets.AZURE_TENANT_ID }}
+          DeleteArtifactsNotInTemplate: 'true'
+          managedIdentity: 'False'
+          operation: 'deploy'
