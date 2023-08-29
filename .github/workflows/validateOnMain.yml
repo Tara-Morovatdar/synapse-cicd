@@ -27,7 +27,7 @@ jobs:
       - name: Validate Synapse workspace
         uses: Azure/synapse-workspace-deployment@V1.8.0
         with:
-          TargetWorkspaceName: 'synapse-uat-tm'
+          TargetWorkspaceName: 'synapse-dev-tm'
           ArtifactsFolder: './'
           operation: 'validate'
       - uses: actions/upload-artifact@v3
