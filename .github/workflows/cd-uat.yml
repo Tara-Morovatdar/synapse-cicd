@@ -1,4 +1,4 @@
-name: cicd-synapse
+name: cd-synapse-uat
 # Controls when the workflow will run
 on:
   workflow_dispatch:
