@@ -19,7 +19,7 @@ permissions:
 jobs: 
   deploy:
     runs-on: ubuntu-latest
-    environment: UAT
+    #environment : UAT
     steps:
 
       - name: Checkout local
