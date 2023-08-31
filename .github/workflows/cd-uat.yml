@@ -4,11 +4,11 @@ on:
   workflow_dispatch:
   push:
     branches: [ workspace_publish ]
-    # paths-ignore:
-    #   - '.github/**'
-    #   - 'build/**'
-    #   - 'README.md'
-    #   - 'CODEOWNERS'
+    paths-ignore:
+      - '.github/**'
+      - 'build/**'
+      - 'README.md'
+      - 'CODEOWNERS'
 
 # Modify the default permissions granted to GITHUB_TOKEN.
 permissions:
@@ -19,31 +19,22 @@ permissions:
 jobs: 
   deploy:
     runs-on: ubuntu-latest
+    environment: UAT
     steps:
 
       - name: Checkout local
         uses: actions/checkout@v3
         
-      # - name: Validate Synapse workspace
-      #   uses: Azure/synapse-workspace-deployment@V1.8.0
-      #   with:
-      #     TargetWorkspaceName: 'synapse-uat-tm'
-      #     ArtifactsFolder: './'
-      #     operation: 'validate'
-      # - uses: actions/upload-artifact@v3
-      #   with:
-      #     name: ExportedArmTemplate
-      #     path: ./ExportedArmTemplate
-      
+
       - name: Synapse workspace deployment
         uses: Azure/Synapse-workspace-deployment@V1.8.0
         with:
-          TargetWorkspaceName: 'synapse-uat-tm'
+          TargetWorkspaceName: 'ws-synapse-uat'
           #ArtifactsFolder: './'
           TemplateFile: './synapse-dev-tm/TemplateForWorkspace.json'
           ParametersFile: './synapse-dev-tm/TemplateParametersForWorkspace.json'
           environment: 'Azure Public'
-          resourceGroup: 'Knauf-test'
+          resourceGroup: 'Knauf-UAT'
           clientId: ${{ secrets.CLIENTID }}
           clientSecret: ${{ secrets.CLIENTSECRET }}
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
