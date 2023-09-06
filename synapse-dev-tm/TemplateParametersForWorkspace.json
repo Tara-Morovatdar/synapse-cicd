@@ -11,11 +11,36 @@
 		"synapse-uat-tm-WorkspaceDefaultSqlServer_connectionString": {
 			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:synapse-uat-tm.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
 		},
-		"synapse-dev-tm-WorkspaceDefaultStorage_properties_typeProperties_url": {
-			"value": "https://storagedevtm.dfs.core.windows.net"
+		"Pipeline 1_properties_0_typeProperties": {
+			"value": ""
 		},
-		"synapse-uat-tm-WorkspaceDefaultStorage_properties_typeProperties_url": {
-			"value": "https://storageuattm.dfs.core.windows.net"
+		"AutoResolveIntegrationRuntime_properties_typeProperties_computeProperties": {
+			"value": {
+				"location": "AutoResolve",
+				"dataFlowProperties": {
+					"computeType": "General",
+					"coreCount": 8,
+					"timeToLive": 0
+				}
+			}
+		},
+		"SQL script 1_properties_content_currentConnection_databaseName": {
+			"value": ""
+		},
+		"SQL script 1_properties_content_currentConnection_poolName": {
+			"value": ""
+		},
+		"SQL script 3_properties_content_currentConnection_databaseName": {
+			"value": ""
+		},
+		"SQL script 3_properties_content_currentConnection_poolName": {
+			"value": ""
+		},
+		"SQL script 4_properties_content_currentConnection_databaseName": {
+			"value": ""
+		},
+		"SQL script 4_properties_content_currentConnection_poolName": {
+			"value": ""
 		}
 	}
 }

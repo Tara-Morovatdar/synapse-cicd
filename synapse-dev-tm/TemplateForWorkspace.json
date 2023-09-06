@@ -17,13 +17,37 @@
 			"metadata": "Secure string for 'connectionString' of 'synapse-uat-tm-WorkspaceDefaultSqlServer'",
 			"defaultValue": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:synapse-uat-tm.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
 		},
-		"synapse-dev-tm-WorkspaceDefaultStorage_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://storagedevtm.dfs.core.windows.net"
+		"Pipeline 1_properties_0_typeProperties": {
+			"type": "int"
 		},
-		"synapse-uat-tm-WorkspaceDefaultStorage_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://storageuattm.dfs.core.windows.net"
+		"AutoResolveIntegrationRuntime_properties_typeProperties_computeProperties": {
+			"type": "object",
+			"defaultValue": {
+				"location": "AutoResolve",
+				"dataFlowProperties": {
+					"computeType": "General",
+					"coreCount": 8,
+					"timeToLive": 0
+				}
+			}
+		},
+		"SQL script 1_properties_content_currentConnection_databaseName": {
+			"type": "string"
+		},
+		"SQL script 1_properties_content_currentConnection_poolName": {
+			"type": "string"
+		},
+		"SQL script 3_properties_content_currentConnection_databaseName": {
+			"type": "string"
+		},
+		"SQL script 3_properties_content_currentConnection_poolName": {
+			"type": "string"
+		},
+		"SQL script 4_properties_content_currentConnection_databaseName": {
+			"type": "string"
+		},
+		"SQL script 4_properties_content_currentConnection_poolName": {
+			"type": "string"
 		}
 	},
 	"variables": {
@@ -42,7 +66,7 @@
 						"dependsOn": [],
 						"userProperties": [],
 						"typeProperties": {
-							"waitTimeInSeconds": 1
+							"waitTimeInSeconds": "[parameters('Pipeline 1_properties_0_typeProperties')]"
 						}
 					}
 				],
@@ -86,7 +110,7 @@
 				"annotations": [],
 				"type": "AzureBlobFS",
 				"typeProperties": {
-					"url": "[parameters('synapse-dev-tm-WorkspaceDefaultStorage_properties_typeProperties_url')]"
+					"url": "https://storagedevtm.dfs.core.windows.net"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
@@ -129,7 +153,7 @@
 				"annotations": [],
 				"type": "AzureBlobFS",
 				"typeProperties": {
-					"url": "[parameters('synapse-uat-tm-WorkspaceDefaultStorage_properties_typeProperties_url')]"
+					"url": "https://storageuattm.dfs.core.windows.net"
 				},
 				"connectVia": {
 					"referenceName": "AutoResolveIntegrationRuntime",
@@ -147,14 +171,7 @@
 			"properties": {
 				"type": "Managed",
 				"typeProperties": {
-					"computeProperties": {
-						"location": "AutoResolve",
-						"dataFlowProperties": {
-							"computeType": "General",
-							"coreCount": 8,
-							"timeToLive": 0
-						}
-					}
+					"computeProperties": "[parameters('AutoResolveIntegrationRuntime_properties_typeProperties_computeProperties')]"
 				}
 			},
 			"dependsOn": []
@@ -175,13 +192,13 @@
 			"apiVersion": "2019-06-01-preview",
 			"properties": {
 				"content": {
-					"query": "SELECT 3 from INFORMATION_SCHEMA.TABLES",
+					"query": "SELECT 4 from INFORMATION_SCHEMA.TABLES",
 					"metadata": {
 						"language": "sql"
 					},
 					"currentConnection": {
-						"databaseName": "master",
-						"poolName": "Built-in"
+						"databaseName": "[parameters('SQL script 1_properties_content_currentConnection_databaseName')]",
+						"poolName": "[parameters('SQL script 1_properties_content_currentConnection_poolName')]"
 					},
 					"resultLimit": 5000
 				},
@@ -200,8 +217,8 @@
 						"language": "sql"
 					},
 					"currentConnection": {
-						"databaseName": "master",
-						"poolName": "Built-in"
+						"databaseName": "[parameters('SQL script 3_properties_content_currentConnection_databaseName')]",
+						"poolName": "[parameters('SQL script 3_properties_content_currentConnection_poolName')]"
 					},
 					"resultLimit": 5000
 				},
@@ -220,8 +237,8 @@
 						"language": "sql"
 					},
 					"currentConnection": {
-						"databaseName": "master",
-						"poolName": "Built-in"
+						"databaseName": "[parameters('SQL script 4_properties_content_currentConnection_databaseName')]",
+						"poolName": "[parameters('SQL script 4_properties_content_currentConnection_poolName')]"
 					},
 					"resultLimit": 5000
 				},
