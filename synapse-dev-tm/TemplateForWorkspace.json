@@ -192,7 +192,7 @@
 			"apiVersion": "2019-06-01-preview",
 			"properties": {
 				"content": {
-					"query": "SELECT 4 from INFORMATION_SCHEMA.TABLES",
+					"query": "SELECT 40 from INFORMATION_SCHEMA.TABLES",
 					"metadata": {
 						"language": "sql"
 					},
