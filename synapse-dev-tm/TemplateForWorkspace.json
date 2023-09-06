@@ -37,7 +37,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Wait1",
+						"name": "Wait2",
 						"type": "Wait",
 						"dependsOn": [],
 						"userProperties": [],
@@ -175,7 +175,7 @@
 			"apiVersion": "2019-06-01-preview",
 			"properties": {
 				"content": {
-					"query": "SELECT 2 from INFORMATION_SCHEMA.TABLES",
+					"query": "SELECT 3 from INFORMATION_SCHEMA.TABLES",
 					"metadata": {
 						"language": "sql"
 					},
@@ -215,42 +215,13 @@
 			"apiVersion": "2019-06-01-preview",
 			"properties": {
 				"content": {
-					"query": "SELECT 1 from INFORMATION_SCHEMA.TABLES",
+					"query": "SELECT 2 from INFORMATION_SCHEMA.TABLES",
 					"metadata": {
 						"language": "sql"
 					},
 					"currentConnection": {
 						"databaseName": "master",
 						"poolName": "Built-in"
-					},
-					"resultLimit": 5000
-				},
-				"type": "SqlQuery"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('workspaceName'), '/sqlpooldev')]",
-			"type": "Microsoft.Synapse/workspaces/sqlPools",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"annotations": []
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('workspaceName'), '/SQL script 5')]",
-			"type": "Microsoft.Synapse/workspaces/sqlscripts",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"content": {
-					"query": "CREATE TABLE Persons (\n    PersonID int,\n    LastName varchar(255),\n    FirstName varchar(255),\n    City varchar(255)\n);\nINSERT INTO Persons (PersonID,LastName,FirstName,City ) VALUES (1, 'morovatdar','tara','dusseldorf')",
-					"metadata": {
-						"language": "sql"
-					},
-					"currentConnection": {
-						"databaseName": "sqlpooldev",
-						"poolName": "sqlpooldev"
 					},
 					"resultLimit": 5000
 				},
