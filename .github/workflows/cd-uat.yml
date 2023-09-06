@@ -1,40 +1,41 @@
-name: cd-synapse-uat
-# Controls when the workflow will run
+name: Azure Synapse Workspace Deployment to TEST
+
 on:
+# Controls when the workflow will run
   workflow_dispatch:
-  push:
-    branches: [ workspace_publish ]
-    paths-ignore:
-      - '.github/**'
-      - 'build/**'
-      - 'README.md'
-      - 'CODEOWNERS'
+  # push:
+  #   branches: [ workspace_publish ]
+    # paths-ignore:
+    #   - '.github/**'
+    #   - 'parameters.yml'
+    #   - 'readme.md'
+
 
 # Modify the default permissions granted to GITHUB_TOKEN.
 permissions:
       id-token: write
-      contents: write
-      packages: write
+      contents: read
 
 jobs: 
   deploy:
+  # Deploy to TEST environment AZ-WEUR-TEST-RNA-RG01
     runs-on: ubuntu-latest
-    environment: UAT
+    environment : UAT
     steps:
 
       - name: Checkout local
         uses: actions/checkout@v3
-        
 
-      - name: Synapse workspace deployment
+      
+      - name: Synapse Workspace Deployment
         uses: Azure/Synapse-workspace-deployment@V1.8.0
         with:
-          TargetWorkspaceName: 'ws-synapse-uat'
-          #ArtifactsFolder: './'
-          TemplateFile: './synapse-dev-tm/TemplateForWorkspace.json'
-          ParametersFile: './synapse-dev-tm/TemplateParametersForWorkspace.json'
+          TargetWorkspaceName: 'ws-synapse-uat'   #'az-weur-test-rna-synws01'
+          TemplateFile: './synapse-dev-tm/TemplateForWorkspace.json' # './az-weur-dev-rna-synws01/TemplateForWorkspace.json'
+          ParametersFile: './synapse-dev-tm/TemplateParametersForWorkspace.json' # './az-weur-dev-rna-synws01/TemplateParametersForWorkspace.json'
+          #OverrideArmParameters: './az-weur-dev-rna-synws01/parameters.yml'
           environment: 'Azure Public'
-          resourceGroup: 'Knauf-UAT'
+          resourceGroup: 'Knauf-UAT' # 'AZ-WEUR-TEST-RNA-RG01'
           clientId: ${{ secrets.CLIENTID }}
           clientSecret: ${{ secrets.CLIENTSECRET }}
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
