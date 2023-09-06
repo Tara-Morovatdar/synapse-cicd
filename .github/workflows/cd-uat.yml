@@ -6,20 +6,19 @@ on:
   #   branches: [ workspace_publish ]
     # paths-ignore:
     #   - '.github/**'
-    #   - 'build/**'
-    #   - 'README.md'
-    #   - 'CODEOWNERS'
+    #   - 'parameters.yml'
+    #   - 'readme.md'
+
 
 # Modify the default permissions granted to GITHUB_TOKEN.
 permissions:
       id-token: write
-      contents: write
-      packages: write
+      contents: read
 
 jobs: 
   deploy:
     runs-on: ubuntu-latest
-    #environment : UAT
+    environment : UAT
     steps:
 
       - name: Checkout local
@@ -29,12 +28,12 @@ jobs:
       - name: Synapse workspace deployment
         uses: Azure/Synapse-workspace-deployment@V1.8.0
         with:
-          TargetWorkspaceName: 'ws-synapse-uat'
-          #ArtifactsFolder: './'
-          TemplateFile: './synapse-dev-tm/TemplateForWorkspace.json'
-          ParametersFile: './synapse-dev-tm/TemplateParametersForWorkspace.json'
+          TargetWorkspaceName: 'ws-synapse-uat'   #'az-weur-test-rna-synws01'
+          TemplateFile: './synapse-dev-tm/TemplateForWorkspace.json' # './az-weur-dev-rna-synws01/TemplateForWorkspace.json'
+          ParametersFile: './synapse-dev-tm/TemplateParametersForWorkspace.json' # './az-weur-dev-rna-synws01/TemplateParametersForWorkspace.json'
+          #OverrideArmParameters: './az-weur-dev-rna-synws01/parameters.yml'
           environment: 'Azure Public'
-          resourceGroup: 'Knauf-UAT'
+          resourceGroup: 'Knauf-UAT' # 'AZ-WEUR-TEST-RNA-RG01'
           clientId: ${{ secrets.CLIENTID }}
           clientSecret: ${{ secrets.CLIENTSECRET }}
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
