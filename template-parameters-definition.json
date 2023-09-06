@@ -32,13 +32,6 @@
             }]
         }
     },
-    "Microsoft.Synapse/workspaces/managedVirtualNetworks/managedPrivateEndpoints": {
-    "properties": {
-        "privateLinkResourceId": "-:-privateLinkResourceId",
-        "groupId": "-:-groupId",
-        "fqdns": "-:-fqdns:array"
-    }
-},
     "Microsoft.Synapse/workspaces/integrationRuntimes": {
         "properties": {
             "typeProperties": {
@@ -58,6 +51,11 @@
             }
         }
     },
+    "Microsoft.Synapse/workspaces/managedVirtualNetworks/managedPrivateEndpoints": {
+    "properties": {
+        "privateLinkResourceId": "="
+    }
+},
     "Microsoft.Synapse/workspaces/linkedServices": {
         "*": {
             "properties": {
