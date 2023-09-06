@@ -2,7 +2,7 @@
 	"name": "SQL script 4",
 	"properties": {
 		"content": {
-			"query": "SELECT 1 from INFORMATION_SCHEMA.TABLES",
+			"query": "SELECT 2 from INFORMATION_SCHEMA.TABLES",
 			"metadata": {
 				"language": "sql"
 			},
