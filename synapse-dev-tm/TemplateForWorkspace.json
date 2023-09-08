@@ -48,6 +48,10 @@
 		},
 		"SQL script 4_properties_content_currentConnection_poolName": {
 			"type": "string"
+		},
+		"Notebook_test_properties_bigDataPool_referenceName": {
+			"type": "string",
+			"defaultValue": "SYNSP01"
 		}
 	},
 	"variables": {
@@ -243,6 +247,81 @@
 					"resultLimit": 5000
 				},
 				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SYNSP01')]",
+			"type": "Microsoft.Synapse/workspaces/bigDataPools",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Notebook_test')]",
+			"type": "Microsoft.Synapse/workspaces/notebooks",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"nbformat": 4,
+				"nbformat_minor": 2,
+				"bigDataPool": {
+					"referenceName": "[parameters('Notebook_test_properties_bigDataPool_referenceName')]",
+					"type": "BigDataPoolReference"
+				},
+				"sessionProperties": {
+					"driverMemory": "28g",
+					"driverCores": 4,
+					"executorMemory": "28g",
+					"executorCores": 4,
+					"numExecutors": 2,
+					"conf": {
+						"spark.dynamicAllocation.enabled": "false",
+						"spark.dynamicAllocation.minExecutors": "2",
+						"spark.dynamicAllocation.maxExecutors": "2",
+						"spark.autotune.trackingId": "2c5a4a06-ce47-448a-97e0-5f47b53a2013"
+					}
+				},
+				"metadata": {
+					"saveOutput": true,
+					"enableDebugMode": false,
+					"kernelspec": {
+						"name": "synapse_pyspark",
+						"display_name": "Synapse PySpark"
+					},
+					"language_info": {
+						"name": "python"
+					},
+					"a365ComputeOptions": {
+						"id": "/subscriptions/d665549e-4077-4a20-871c-ec338994be7b/resourceGroups/Knauf-test/providers/Microsoft.Synapse/workspaces/synapse-dev-tm/bigDataPools/SYNSP01",
+						"name": "SYNSP01",
+						"type": "Spark",
+						"endpoint": "https://synapse-dev-tm.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/SYNSP01",
+						"auth": {
+							"type": "AAD",
+							"authResource": "https://dev.azuresynapse.net"
+						},
+						"sparkVersion": "2.4",
+						"nodeCount": 3,
+						"cores": 4,
+						"memory": 28,
+						"automaticScaleJobs": false
+					},
+					"sessionKeepAliveTimeout": 30
+				},
+				"cells": [
+					{
+						"cell_type": "code",
+						"metadata": {},
+						"source": [
+							"import pandas as pd\r\n",
+							"from datetime import datetime, timezone"
+						],
+						"outputs": [],
+						"execution_count": 1
+					}
+				]
 			},
 			"dependsOn": []
 		}
