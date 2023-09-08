@@ -41,9 +41,6 @@
 		},
 		"SQL script 4_properties_content_currentConnection_poolName": {
 			"value": ""
-		},
-		"Notebook_test_properties_bigDataPool_referenceName": {
-			"value": "SYNSP01"
 		}
 	}
 }
