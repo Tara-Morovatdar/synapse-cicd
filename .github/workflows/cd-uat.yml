@@ -43,3 +43,17 @@ jobs:
           DeleteArtifactsNotInTemplate: 'true'
           managedIdentity: 'False'
           operation: 'deploy'
+                                 
+                                 
+      - name: Remove DEV SQL linked services
+        uses: azure/powershell@v1
+        with:
+          inlineScript: |
+             'Remove-AzSynapseLinkedService -WorkspaceName synapse-dev-tm -Name synapse-dev-tm-WorkspaceDefaultSqlServer -ErrorAction SilentlyContinue -Force'
+          azPSVersion: latest
+      - name: Remove DEV ADLS linked services
+        uses: azure/powershell@v1
+        with:
+          inlineScript: |
+             'Suspend-AzSynapseSqlPool -WorkspaceName synapse-dev-tm -Name synapse-dev-tm-WorkspaceDefaultStorage -ErrorAction SilentlyContinue -AsJob'
+          azPSVersion: latest
